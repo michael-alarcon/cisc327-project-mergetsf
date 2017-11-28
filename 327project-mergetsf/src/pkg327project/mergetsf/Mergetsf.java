@@ -36,6 +36,7 @@ public class Mergetsf {
                         break;
                     } else {
                         bufferedWriter.write(line);
+                        bufferedWriter.newLine();
                     }
                 }
                 bufferedReader.close();
