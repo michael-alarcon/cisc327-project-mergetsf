@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pkg327project.mergetsf;
+package merge;
 
 import java.io.*;
 
@@ -18,14 +18,13 @@ public class Mergetsf {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-
+        File dir = new File(args[0]);
+        File[] directoryListing = dir.listFiles();
         String line;
+        
         try {
             FileWriter fw = new FileWriter(args[1]);
             BufferedWriter bufferedWriter = new BufferedWriter(fw);
-
-            File dir = new File(args[0]);
-            File[] directoryListing = dir.listFiles();
 
             for (File transactionFile : directoryListing) {
                 FileReader fileReader = new FileReader(transactionFile);
@@ -40,11 +39,12 @@ public class Mergetsf {
                     }
                 }
                 bufferedReader.close();
+                transactionFile.delete();
             }
             bufferedWriter.write("EOS");
             bufferedWriter.flush();
             bufferedWriter.close();
-            
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
